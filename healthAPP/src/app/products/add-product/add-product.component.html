@@ -1,0 +1,77 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="warning">
+    <ion-buttons slot="start">
+      <ion-button (click)="goTo(true,currentSlide)" *ngIf="currentSlide != 0">
+        <ion-icon name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title class="ion-text-center">
+      ADD Product
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="goTo(false,currentSlide)" *ngIf="currentSlide != 2">
+        <ion-icon name="arrow-forward-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <ion-slides pager="false" [options]="slideOpts" style="height: 100%;width: 100%;" #slides>
+    <ion-slide>
+      <form [formGroup]="productForm" (ngSubmit)="createProduct()" style="height: 100%;width: 100%;">
+        <ion-item>
+          <ion-label position="floating">Name :</ion-label>
+          <ion-input placeholder="Enter the name of product" formControlName="name"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Brand :</ion-label>
+          <ion-input placeholder="Enter the brand" formControlName="brand"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Packaging :</ion-label>
+          <ion-input placeholder="Enter the packaging type" formControlName="packaging"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Valid Days After Opening :</ion-label>
+          <ion-input placeholder="Enter validation amount" formControlName="daysAfterOpening"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Country :</ion-label>
+          <ion-input placeholder="Enter producer country" formControlName="country"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Weight :</ion-label>
+          <ion-input placeholder="Enter the weight in grams" formControlName="weight" type="number"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Total Calories :</ion-label>
+          <ion-input placeholder="Enter the total number of calories" formControlName="totalCal" type="number">
+          </ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>Category :</ion-label>
+          <ion-select multiple="true" placeholder="Select the categories" formControlName="category">
+            <ion-select-option *ngFor="let cat of categories | enumToArray" [value]="cat">{{cat | titlecase }}
+            </ion-select-option>
+          </ion-select>
+        </ion-item>
+      </form>
+    </ion-slide>
+    <ion-slide>
+      <ion-item>
+        <ion-label>Ing :</ion-label>
+        <ion-select multiple="true" placeholder="Select the ing">
+          <ion-select-option *ngFor="let ing of allIngredients" [value]="ing">
+            <pre>
+              {{ing}}
+            </pre>
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-slide>
+    <ion-slide>
+      <h1>Slide 3</h1>
+    </ion-slide>
+  </ion-slides>
+</ion-content>

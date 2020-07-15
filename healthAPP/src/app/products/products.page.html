@@ -1,0 +1,30 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="warning">
+    <ion-title>
+      Products
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="addProduct()">
+        <ion-icon slot="icon-only" name="add"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card *ngFor="let product of productList" color="primary" (click)="openProductdetails(product.id)">
+    <ion-card-header>
+      <ion-card-subtitle>{{product.name}}</ion-card-subtitle>
+      <ion-card-title>{{product.brand}}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-label>packaging: {{product.packaging}}</ion-label>
+      <ion-label>category: {{product.category}}</ion-label>
+      <ion-label>daysAfterOpening: {{product.daysAfterOpening}}</ion-label>
+      <ion-label>country: {{product.country}}</ion-label>
+      <ion-label>weight: {{product.weight}}</ion-label>
+      <ion-label>totalCal: {{product.totalCal}}</ion-label>
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>
