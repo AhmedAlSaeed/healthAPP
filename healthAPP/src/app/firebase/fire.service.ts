@@ -14,9 +14,11 @@ export class FireService {
   async createProduct(data: Product) {
     return await this.fb.collection('Product').add(data);
   }
+
   async deleteProduct(id: string) {
     return await this.fb.collection<Product[]>('Product').doc<Product>(id).delete();
   }
+
   async updateProduct(data: Product) {
     const { id, ...product } = data;
     return await this.fb.collection<Product[]>('Product').doc<Product>(id).update(product);
@@ -31,6 +33,7 @@ export class FireService {
   getAllProducts() {
     return this.fb.collection<Product[]>('Product').snapshotChanges();
   }
+
   // ? Ingredient
 
   async createIngredient(data: Ingredient) {
@@ -46,6 +49,8 @@ export class FireService {
   getAllIngredient() {
     return this.fb.collection<Ingredient[]>('Ingredient').snapshotChanges();
   }
+
+
   // ? NutritionFact
 
   async createNutritionFact(data: NutritionFact) {
@@ -57,6 +62,10 @@ export class FireService {
   async updateNutritionFact(data: NutritionFact) {
     const { id, ...NutritionFact } = data;
     return await this.fb.collection<NutritionFact[]>('NutritionFact').doc<NutritionFact>(id).update(NutritionFact);
+  }
+
+  getAllNutritionFact() {
+    return this.fb.collection<NutritionFact[]>('NutritionFact').snapshotChanges();
   }
 
 }

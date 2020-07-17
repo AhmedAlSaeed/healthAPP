@@ -3,7 +3,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Product } from 'src/app/firebase/data.interface';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { FireService } from 'src/app/firebase/fire.service';
-import { IonSlides, PopoverController } from '@ionic/angular';
+import { IonSlides, PopoverController, ModalController } from '@ionic/angular';
 import { DocumentChangeAction } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 
@@ -16,7 +16,8 @@ export class AddProductComponent implements OnInit {
   product: Product;
   productForm: FormGroup;
   categories = Category;
-  allIngredients;
+  allIngredients = [];
+  allNutritionFact = [];
   slideOpts = {
     initialSlide: 0,
     speed: 400
@@ -24,7 +25,7 @@ export class AddProductComponent implements OnInit {
   currentSlide = 0;
 
   @ViewChild('slides', { static: true }) slides: IonSlides;
-  constructor(public fb: FormBuilder, private fbService: FireService, public popoverController: PopoverController) {
+  constructor(public fb: FormBuilder, private fbService: FireService, private modalController: ModalController) {
     this.product = {} as Product;
   }
 
@@ -49,6 +50,15 @@ export class AddProductComponent implements OnInit {
         };
       })
       console.log(this.allIngredients);
+    });
+    this.fbService.getAllNutritionFact().subscribe(data => {
+      this.allNutritionFact = data.map(e => {
+        return {
+          id: e.payload.doc.id,
+          ...e.payload.doc.data(),
+        };
+      })
+      console.log(this.allNutritionFact);
     });
   }
 
@@ -100,5 +110,8 @@ export class AddProductComponent implements OnInit {
     }
   }
 
+  close() {
+    this.modalController.dismiss();
+  }
 
 }

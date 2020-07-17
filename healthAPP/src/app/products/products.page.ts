@@ -1,3 +1,5 @@
+import { AddNutritionFactComponent } from './add-nutrition-fact/add-nutrition-fact.component';
+import { AddIngredientComponent } from './add-ingredient/add-ingredient.component';
 import { DetailsComponent } from './details/details.component';
 import { Component, OnInit } from '@angular/core';
 import { FireService } from '../firebase/fire.service';
@@ -43,12 +45,43 @@ export class ProductsPage implements OnInit {
     await modal.present();
   }
 
+  async addIngredient(id?: string) {
+    const modal = await this.modalCtrl.create({
+      component: AddIngredientComponent,
+      componentProps: { id, isEdit: id ? true : false }
+    });
+    await modal.present();
+  }
+
+  async addNutritionFact(id?: string) {
+    const modal = await this.modalCtrl.create({
+      component: AddNutritionFactComponent,
+      componentProps: { id, isEdit: id ? true : false }
+    });
+    await modal.present();
+  }
+
   async addPopover(ev: any) {
     const popover = await this.popoverCtrl.create({
       component: AddPopoverComponent,
       cssClass: 'my-custom-class',
       event: ev,
       translucent: true
+    });
+    popover.onWillDismiss().then(async data => {
+      switch (data.data) {
+        case 0:
+          this.addProduct();
+          break;
+        case 1:
+          this.addNutritionFact();
+          break;
+        case 2:
+          this.addIngredient();
+          break;
+        default:
+          break;
+      }
     });
     return await popover.present();
   }

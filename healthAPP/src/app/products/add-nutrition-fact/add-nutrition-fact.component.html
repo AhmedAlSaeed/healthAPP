@@ -1,3 +1,35 @@
-<p>
-  add-nutrition-fact works!
-</p>
+<ion-header [translucent]="true">
+  <ion-toolbar color="warning">
+    <ion-buttons slot="start">
+      <ion-button (click)="close()">
+        <ion-icon slot="icon-only" name="close-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title class="ion-text-center">
+      ADD Nutrition Fact
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="createNutritionFact()">
+        <ion-icon slot="icon-only" name="add"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <form [formGroup]="nutritionFactForm" (ngSubmit)="createNutritionFact()" style="height: 100%;width: 100%;">
+    <ion-item>
+      <ion-label position="floating">Name :</ion-label>
+      <ion-input placeholder="Enter the name of nutrition" formControlName="name"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Description :</ion-label>
+      <ion-input placeholder="Enter the Description" formControlName="description"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Calories Per Gram :</ion-label>
+      <ion-input type="number" placeholder="Enter the Calories Per Gram" formControlName="description"></ion-input>
+    </ion-item>
+  </form>
+
+</ion-content>

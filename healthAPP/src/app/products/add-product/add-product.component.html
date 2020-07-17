@@ -1,6 +1,9 @@
 <ion-header [translucent]="true">
   <ion-toolbar color="warning">
     <ion-buttons slot="start">
+      <ion-button (click)="close()">
+        <ion-icon slot="icon-only" name="close-outline"></ion-icon>
+      </ion-button>
       <ion-button (click)="goTo(true,currentSlide)" *ngIf="currentSlide != 0">
         <ion-icon name="arrow-back-outline"></ion-icon>
       </ion-button>
@@ -59,16 +62,29 @@
       </form>
     </ion-slide>
     <ion-slide>
-      <ion-item>
-        <ion-label>Ing :</ion-label>
-        <ion-select multiple="true" placeholder="Select the ing">
-          <ion-select-option *ngFor="let ing of allIngredients" [value]="ing">
-            <pre>
-              {{ing}}
-            </pre>
-          </ion-select-option>
-        </ion-select>
-      </ion-item>
+      <div style="width: 100%; height: 100%; flex-direction: column; flex: content;">
+
+        <ion-item style="width: 100%;">
+          <ion-label>Ingredients :</ion-label>
+          <ion-select multiple="true" placeholder="Select the Ingredients">
+            <ion-select-option *ngFor="let ing of allIngredients" [value]="ing">
+              <pre>
+                {{ing.name}}
+              </pre>
+            </ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-item style="width: 100%;">
+          <ion-label>Nutrition Facts :</ion-label>
+          <ion-select multiple="true" placeholder="Select the Nutrition Facts">
+            <ion-select-option *ngFor="let nf of allNutritionFact" [value]="nf">
+              <pre>
+                {{nf.name + nf.calPerGram + ' Calories per gram'}}
+              </pre>
+            </ion-select-option>
+          </ion-select>
+        </ion-item>
+      </div>
     </ion-slide>
     <ion-slide>
       <h1>Slide 3</h1>

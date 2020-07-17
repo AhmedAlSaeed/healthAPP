@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { ModalController } from '@ionic/angular';
+import { FireService } from 'src/app/firebase/fire.service';
 
 @Component({
   selector: 'app-add-nutrition-fact',
@@ -6,9 +9,24 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./add-nutrition-fact.component.scss'],
 })
 export class AddNutritionFactComponent implements OnInit {
+  nutritionFactForm: FormGroup;
+  constructor(private modalController: ModalController, private fb: FireService, private Fbuilder: FormBuilder) { }
 
-  constructor() { }
+  ngOnInit() {
+    this.nutritionFactForm = this.Fbuilder.group({
+      name: ['', Validators.required],
+      description: ['', Validators.required],
+      calPerGram: ['', Validators.required],
+    })
+  }
 
-  ngOnInit() {}
+  async createNutritionFact() {
+    await this.fb.createNutritionFact(this.nutritionFactForm.value);
+    this.close();
+  }
+
+  close() {
+    this.modalController.dismiss();
+  }
 
 }

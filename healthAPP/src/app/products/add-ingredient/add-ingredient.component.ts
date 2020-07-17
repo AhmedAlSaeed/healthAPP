@@ -1,4 +1,7 @@
+import { FireService } from 'src/app/firebase/fire.service';
 import { Component, OnInit } from '@angular/core';
+import { ModalController } from '@ionic/angular';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-add-ingredient',
@@ -6,9 +9,22 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./add-ingredient.component.scss'],
 })
 export class AddIngredientComponent implements OnInit {
+  ingredientForm: FormGroup;
+  constructor(private modalController: ModalController, private fb: FireService, private Fbuilder: FormBuilder) { }
 
-  constructor() { }
+  ngOnInit() {
+    this.ingredientForm = this.Fbuilder.group({
+      name: ['', Validators.required],
+      description: ['', Validators.required]
+    })
+  }
 
-  ngOnInit() {}
+  async createIngredient() {
+    await this.fb.createIngredient(this.ingredientForm.value);
+    this.close();
+  }
 
+  close() {
+    this.modalController.dismiss();
+  }
 }

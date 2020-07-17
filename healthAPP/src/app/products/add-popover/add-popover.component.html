@@ -1,7 +1,11 @@
+<ion-list-header color="warning" class="ion-text-center">
+  <span class="ion-text-center" style="width: 100%; font-size: x-large;font-weight: 500;">
+    Add
+  </span>
+</ion-list-header>
 <ion-list>
-  <ion-list-header>Add</ion-list-header>
-  <ion-item button>Product</ion-item>
-  <ion-item button>Nutrition Fact</ion-item>
-  <ion-item button>Ingredient</ion-item>
-  <ion-item lines="none" detail="false" button onClick="dismissPopover()">Close</ion-item>
+  <ion-item button (click)="dismissPopover(0)">Product</ion-item>
+  <ion-item button (click)="dismissPopover(1)">Nutrition Fact</ion-item>
+  <ion-item button (click)="dismissPopover(2)">Ingredient</ion-item>
+  <ion-item lines="none" detail="false" button (click)="dismissPopover()">Close</ion-item>
 </ion-list>

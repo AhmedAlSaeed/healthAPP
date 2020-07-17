@@ -22,7 +22,7 @@ import { AddPopoverComponent } from './add-popover/add-popover.component';
     ReactiveFormsModule,
     ProductsPageRoutingModule,
   ],
-  declarations: [ProductsPage, AddProductComponent, DetailsComponent, AddIngredientComponent, AddNutritionFactComponent, EnumToArrayPipe],
+  declarations: [ProductsPage, AddProductComponent, DetailsComponent, AddIngredientComponent, AddNutritionFactComponent, EnumToArrayPipe, AddPopoverComponent],
   entryComponents: [AddProductComponent, DetailsComponent, AddIngredientComponent, AddNutritionFactComponent, AddPopoverComponent]
 })
 export class ProductsPageModule { }
